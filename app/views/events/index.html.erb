@@ -1,0 +1,58 @@
+<% content_for :title, "Buy Tickets for Events and Shows" %>
+
+<!-- Caroussel of Top 3 selling events -->
+<div class="carouselContainer mt-3 mb-3">
+	<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+		<!-- Indicators -->
+		<ol class="carousel-indicators">
+			<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+			<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+			<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+		</ol>
+	  <!-- Wrapper for slides -->
+	  	<div class="carousel-inner" role="listbox">
+	    	<div class="carousel-item active">
+	    		<%= image_tag ("quatre.jpg"),style: 'height:550px;width:1100px;' %>
+	    	</div>
+
+	    <div class="carousel-item">
+	      <%= image_tag ( "deux.jpg"), style: 'height:550px;width:1100px;'%>
+	    </div>
+
+	    <div class="carousel-item">
+	      <%= image_tag ( "trois.jpg"), style: 'height:550px;width:1100px;'%>
+	    </div>
+	  </div>
+	  <!-- Controls -->
+	 	<a class="carousel-control-prev" href="#carousel-example-generic" role="button" data-slide="prev">
+	  	<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+	        <span class="sr-only">Previous</span>
+	    </a>
+	    <a class="carousel-control-next" href="#carousel-example-generic" role="button" data-slide="next">
+	        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+	        <span class="sr-only">Next</span>
+	    </a>
+	</div>
+</div>
+
+<!-- List of Events -->
+<div class="container-fluid">
+  	<div class="row">
+	    <% @events.each do |event| %>
+	    	<%= link_to event do %>
+			    <div class= "col-sm m-2 text-center" >
+			     	<div class="card" style="width: 18rem; text-decoration: none;">
+			        	<div class="card-body card-event">
+			        		<p class="text-info"><%= event.location %></p>
+			         		<h5 class="text-info"><%= event.title %></h5>
+			         		<p class="text-info"><%= event.start_date.strftime("%B %d, %Y")%></p>
+			         		<% if user_signed_in? %>
+			          		<%= link_to "Buy Now", new_attendance_path , class: "btn btn-danger text-white m-2" %>
+			          		<% end %>
+			       		</div>
+			      	</div>
+			    </div>
+			<% end %>
+		<% end %>
+	</div>
+</div>
